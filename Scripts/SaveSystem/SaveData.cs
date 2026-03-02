@@ -65,10 +65,11 @@ public class SaveData
     [Header("Dark Abilities")]
     public List<string> unlockedAbilities = new List<string>();
 
-    // ===== AQUARIUM =====
+    // ===== AQUARIUM ===== (Agent 16)
     [Header("Aquarium")]
     public List<string> aquariumFish = new List<string>();
     public Dictionary<string, int> breedingPairs = new Dictionary<string, int>();
+    public string aquariumData; // Full aquarium system data (AquariumSaveData serialized)
 
     // ===== STATISTICS =====
     [Header("Statistics")]
@@ -86,6 +87,23 @@ public class SaveData
     public string eventManagerData;    // EventManager data (Agent 19)
     public string eventCalendarData;   // EventCalendar data (Agent 19)
     public string migrationData;       // MigrationSystem data (Agent 19)
+    public string idleData;            // IdleManager data (Agent 20)
+    public string companionManagerData;// CompanionManager data (Agent 17)
+    public string loyaltySystemData;   // LoyaltySystem data (Agent 17)
+    public string moraleSystemData;    // MoraleSystem data (Agent 17)
+    public string abilitySystemData;   // CompanionAbilitySystem data (Agent 17)
+    public string crewManagerData;     // CrewManager data (Agent 17)
+
+    // ===== COOKING & CRAFTING DATA =====
+    [Header("Cooking & Crafting")]
+    public CookingData cookingData;
+    public CraftingData craftingData;
+    public PreservationData preservationData;
+    public List<SerializedBuff> activeBuffs = new List<SerializedBuff>();
+
+    // ===== PHOTOGRAPHY DATA =====
+    [Header("Photography")]
+    public PhotographyData photographyData;
 
     /// <summary>
     /// Creates a new SaveData instance with default values.
@@ -254,5 +272,172 @@ public struct SerializableQuaternion
     public static implicit operator SerializableQuaternion(Quaternion q)
     {
         return new SerializableQuaternion(q);
+    }
+}
+
+/// <summary>
+/// Agent 20: Idle/AFK Progression System - Save Data
+/// Contains all persistent data for offline progression tracking.
+/// </summary>
+[System.Serializable]
+public class IdleData
+{
+    public string lastLogoutTime;                        // DateTime as string (ISO 8601)
+    public float accumulatedOfflineMoney;
+    public int offlineFishCaught;
+    public Dictionary<string, int> offlineMaterialsGathered = new Dictionary<string, int>();
+    public List<string> offlineEventsOccurred = new List<string>();
+    public string lastComebackBonusTime;                 // DateTime as string (ISO 8601)
+    public int idleUpgradesBitmask;                      // Bitmask of owned upgrades
+    public Dictionary<string, int> idleUpgradeLevels = new Dictionary<string, int>();
+    public float totalIdleEarnings;
+    public int totalIdleFishCaught;
+    public bool hasCollectedOfflineRewards;
+
+    /// <summary>
+    /// Creates a new IdleData instance with default values.
+    /// </summary>
+    public IdleData()
+    {
+        lastLogoutTime = System.DateTime.UtcNow.ToString("o");
+        accumulatedOfflineMoney = 0f;
+        offlineFishCaught = 0;
+        offlineMaterialsGathered = new Dictionary<string, int>();
+        offlineEventsOccurred = new List<string>();
+        lastComebackBonusTime = System.DateTime.MinValue.ToString("o");
+        idleUpgradesBitmask = 0;
+        idleUpgradeLevels = new Dictionary<string, int>();
+        totalIdleEarnings = 0f;
+        totalIdleFishCaught = 0;
+        hasCollectedOfflineRewards = true;
+    }
+}
+
+/// <summary>
+/// Agent 15: Cooking & Crafting System - Cooking Save Data
+/// Contains cooking system persistent data.
+/// </summary>
+[System.Serializable]
+public class CookingData
+{
+    public List<string> unlockedRecipes = new List<string>();
+
+    public CookingData()
+    {
+        unlockedRecipes = new List<string>();
+    }
+}
+
+/// <summary>
+/// Agent 15: Cooking & Crafting System - Crafting Save Data
+/// Contains crafting system persistent data including materials and blueprints.
+/// </summary>
+[System.Serializable]
+public class CraftingData
+{
+    public Dictionary<string, int> materials = new Dictionary<string, int>();
+    public List<string> discoveredBlueprints = new List<string>();
+
+    public CraftingData()
+    {
+        materials = new Dictionary<string, int>();
+        discoveredBlueprints = new List<string>();
+    }
+}
+
+/// <summary>
+/// Agent 15: Cooking & Crafting System - Preservation Save Data
+/// Contains fish preservation and decay tracking data.
+/// </summary>
+[System.Serializable]
+public class PreservationData
+{
+    public Dictionary<string, float> decayTimers = new Dictionary<string, float>();
+    public Dictionary<string, PreservationMethod> preservationMethods = new Dictionary<string, PreservationMethod>();
+    public bool iceBoxUnlocked = true;
+    public bool saltingUnlocked = false;
+    public bool smokingUnlocked = false;
+    public bool freezingUnlocked = false;
+
+    public PreservationData()
+    {
+        decayTimers = new Dictionary<string, float>();
+        preservationMethods = new Dictionary<string, PreservationMethod>();
+        iceBoxUnlocked = true;
+        saltingUnlocked = false;
+        smokingUnlocked = false;
+        freezingUnlocked = false;
+    }
+}
+
+/// <summary>
+/// Agent 18: Photography Mode Specialist - Photography Save Data
+/// Contains all persistent data for the photography system.
+/// </summary>
+[System.Serializable]
+public class PhotographyData
+{
+    public List<SavedPhoto> photoGallery = new List<SavedPhoto>();
+    public Dictionary<string, string> encyclopediaPhotos = new Dictionary<string, string>(); // fishID -> photoID
+    public List<string> completedChallenges = new List<string>();
+    public Dictionary<string, int> challengeProgress = new Dictionary<string, int>();
+    public int totalPhotosTaken = 0;
+    public float averagePhotoQuality = 0f;
+    public int perfectShots = 0;
+    public List<string> unlockedFilters = new List<string>();
+
+    public PhotographyData()
+    {
+        photoGallery = new List<SavedPhoto>();
+        encyclopediaPhotos = new Dictionary<string, string>();
+        completedChallenges = new List<string>();
+        challengeProgress = new Dictionary<string, int>();
+        totalPhotosTaken = 0;
+        averagePhotoQuality = 0f;
+        perfectShots = 0;
+        unlockedFilters = new List<string>();
+    }
+}
+
+/// <summary>
+/// Serializable photo data for saving.
+/// </summary>
+[System.Serializable]
+public class SavedPhoto
+{
+    public string photoID;
+    public string fileName;
+    public string filePath;
+    public string captureDate; // DateTime as string
+    public int resolutionWidth;
+    public int resolutionHeight;
+
+    // Camera settings
+    public SerializableVector3 cameraPosition;
+    public SerializableQuaternion cameraRotation;
+    public float fov;
+    public float exposure;
+
+    // Game state
+    public string locationID;
+    public float timeOfDay;
+    public string weatherType;
+
+    // Fish information
+    public string fishSpeciesID;
+    public float qualityRating;
+
+    // Filters applied
+    public List<string> filtersApplied = new List<string>();
+
+    // Metadata
+    public string tags;
+    public string notes;
+
+    public SavedPhoto()
+    {
+        captureDate = System.DateTime.Now.ToString("o");
+        filtersApplied = new List<string>();
+        qualityRating = 0f;
     }
 }

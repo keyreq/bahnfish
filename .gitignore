@@ -2,3 +2,8 @@ nul
 *.tmp
 *.log
 .claude/
+# Sensitive Files
+CLAUDE_CODE_MCP_SETUP.md
+MCP_SETUP_COMPLETE.md
+*_API_KEY*
+*.key
