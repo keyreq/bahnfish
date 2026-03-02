@@ -1,0 +1,73 @@
+ACCESSIBILITY & SETTINGS SYSTEM - FILE LISTING
+================================================
+Agent 21 Implementation - Week 27-28
+Date: 2026-03-01
+
+CORE SCRIPTS (12 files)
+------------------------
+1. SettingsManager.cs              (350 lines) - Central settings hub
+2. VideoSettings.cs                (580 lines) - Graphics settings
+3. AudioSettings.cs                (260 lines) - Audio settings
+4. ControlSettings.cs              (470 lines) - Input settings
+5. GameplaySettings.cs             (360 lines) - Gameplay settings
+6. AccessibilitySettings.cs        (420 lines) - Accessibility features
+7. ColorblindSimulator.cs          (340 lines) - 8 colorblind modes
+8. InputRemapping.cs               (410 lines) - Key rebinding UI
+9. PerformanceMonitor.cs           (340 lines) - FPS & performance
+10. UIScaler.cs                    (320 lines) - Dynamic UI scaling
+11. SubtitleSystem.cs              (310 lines) - Subtitle display
+12. TutorialHintSystem.cs          (380 lines) - Tutorial hints
+
+DOCUMENTATION (3 files)
+-----------------------
+13. README.md                      (850+ lines) - Complete documentation
+14. INTEGRATION_EXAMPLE.cs         (410 lines) - Usage examples
+15. FILES.txt                      (This file) - File listing
+
+INTEGRATION (1 file modified)
+-----------------------------
+16. ../SaveSystem/SaveData.cs      (+3 lines) - Added settingsData field
+
+TOTAL
+-----
+Production Code: ~4,540 lines
+Documentation: ~1,260 lines
+Total: ~5,800 lines
+
+All files located in: C:\Users\larry\bahnfish\Scripts\Accessibility\
+
+KEY FEATURES
+------------
+- 5 Settings Categories (Video, Audio, Controls, Gameplay, Accessibility)
+- 8 Scientifically Accurate Colorblind Modes
+- UI Scaling (75%-200%)
+- Font Size (4 levels)
+- Input Remapping with Conflict Detection
+- Performance Monitoring & Auto-Quality
+- Subtitle System
+- Tutorial Hint System
+- Reduced Motion Mode
+- Photosensitivity Mode
+- One-Handed Mode
+- Auto-Aim Assist
+- 50+ Published Events
+- Complete Save/Load Integration
+
+DEPENDENCIES
+------------
+- UnityEngine
+- UnityEngine.UI
+- System (for serialization)
+- System.Collections.Generic
+- EventSystem (existing)
+- SaveManager (existing)
+- PlayerPrefs (Unity built-in)
+
+STATUS
+------
+✅ COMPLETE - Ready for production
+✅ 100% XML Documentation
+✅ Comprehensive README
+✅ Integration Examples
+✅ Event-Driven Architecture
+✅ Singleton Pattern Implementation

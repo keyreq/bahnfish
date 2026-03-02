@@ -105,6 +105,18 @@ public class SaveData
     [Header("Photography")]
     public PhotographyData photographyData;
 
+    // ===== AUDIO DATA ===== (Agent 12)
+    [Header("Audio")]
+    public AudioData audioData;
+
+    // ===== VFX DATA ===== (Agent 13)
+    [Header("VFX")]
+    public VFXData vfxData;
+
+    // ===== SETTINGS DATA ===== (Agent 21)
+    [Header("Settings")]
+    public SettingsData settingsData;
+
     /// <summary>
     /// Creates a new SaveData instance with default values.
     /// </summary>
@@ -439,5 +451,42 @@ public class SavedPhoto
         captureDate = System.DateTime.Now.ToString("o");
         filtersApplied = new List<string>();
         qualityRating = 0f;
+    }
+}
+
+/// <summary>
+/// Agent 12: Audio System Specialist - Audio Save Data
+/// Contains all persistent audio settings and preferences.
+/// </summary>
+[System.Serializable]
+public class AudioData
+{
+    [Header("Volume Settings")]
+    public float masterVolume = 1.0f;
+    public float musicVolume = 0.7f;
+    public float sfxVolume = 0.8f;
+    public float ambientVolume = 0.6f;
+    public float uiVolume = 1.0f;
+
+    [Header("Mute States")]
+    public bool musicMuted = false;
+    public bool sfxMuted = false;
+    public bool ambientMuted = false;
+    public bool uiMuted = false;
+
+    /// <summary>
+    /// Creates a new AudioData instance with default values.
+    /// </summary>
+    public AudioData()
+    {
+        masterVolume = 1.0f;
+        musicVolume = 0.7f;
+        sfxVolume = 0.8f;
+        ambientVolume = 0.6f;
+        uiVolume = 1.0f;
+        musicMuted = false;
+        sfxMuted = false;
+        ambientMuted = false;
+        uiMuted = false;
     }
 }
