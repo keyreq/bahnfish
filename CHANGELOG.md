@@ -52,6 +52,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Shaders: Water surface, Aurora, Blood Moon overlay
   - Post-Processing: Bloom, Vignette, Color Grading profiles
 
+### Unity Scripts & Tools
+- **Assets/Editor/BuildScript.cs**: Automated build system
+  - Build all platforms (Windows/Mac/Linux)
+  - Quality presets configuration
+  - IL2CPP backend setup
+  - Command-line build support
+- **Assets/Editor/PostBuildProcessor.cs**: Post-build automation
+  - Copy README and legal files
+  - Create launch scripts (.bat, .sh)
+  - Linux .desktop file generation
+- **Assets/Editor/PerformanceProfiler.cs**: Performance monitoring tool
+  - Real-time FPS tracking
+  - Memory profiling
+  - Export performance reports
+  - Quick performance checks
+- **Assets/Tests/Editor/BuildTests.cs**: Pre-build validation
+  - Scene configuration tests
+  - Player settings verification
+  - Quality settings checks
+  - No missing scripts validation
+- **Assets/Tests/Runtime/CoreSystemTests.cs**: Runtime system tests
+  - GameManager singleton tests
+  - EventSystem pub/sub tests
+  - TimeManager progression tests
+  - SaveManager functionality tests
+- **Assets/Tests/Runtime/IntegrationTests.cs**: Cross-system integration tests
+  - Complete fishing loop (catch → inventory → sell)
+  - Atmosphere loop (time → music → ambient → lighting)
+  - Horror loop (sanity → effects → hazards → audio)
+  - Companion loop (pet → ability → loyalty)
+  - Cooking buff loop (cook → buff → fishing)
+  - Save/load persistence tests
+  - Event loop (event → music → VFX → rewards)
+
 ### Timeline
 - **Week 31-32**: Asset integration and initial testing
 - **Week 33-34**: Comprehensive testing and bug fixing
@@ -59,7 +93,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Week 36**: Build pipeline and launch preparation
 
 ### Statistics
-- **Phase 6 Documentation**: 3 major documents
+- **Phase 6 Documentation**: 9 major documents
+- **Unity Scripts**: 6 files (build automation, testing, profiling)
+- **Test Coverage**: 11 build tests, 10 core tests, 7 integration tests
 - **Testing Framework**: 7 test categories, 100+ test cases
 - **Asset Specifications**: 158+ audio files, 78+ particle prefabs
 - **Performance Targets**: 60 FPS, <2GB RAM, <5s load times
